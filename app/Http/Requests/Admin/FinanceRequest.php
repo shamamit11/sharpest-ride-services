@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Admin;
 use App\Http\Requests\ApiRequest;
 
-class ServiceTypeRequest extends ApiRequest
+class FinanceRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,9 @@ class ServiceTypeRequest extends ApiRequest
     {
         return [
             'id' => 'integer|nullable',
-            'service_id' => 'required',
-            'vehicle_make_id' => 'required',
-            'vehicle_model_id' => 'required',
             'name' => 'required',
-            'price' => 'required'
+            'orders' => 'required',
+            'status' => 'nullable',
         ];
     }
 }

@@ -13,6 +13,52 @@
                                     <input type="hidden" class="form-control" name="id"
                                         value="{{ isset($row->id)? $row->id : '' }}">
                                     
+                                        <div class="mb-3 col-12">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label"> Vehicle Make</label>
+                                                    <select name="vehicle_make_id" id="vehicle_make_id" class="select2 form-control">
+                                                        <option value="">Select Make</option>
+                                                        @if ($vehicle_makes->count() > 0)
+                                                        @foreach($vehicle_makes as $res)
+                                                        <option value="{{ $res->id }}"  @if (@$row->vehicle_make_id ==
+                                                            $res->id) selected @endif>{{$res->name}}</option>
+                                                        @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <div class="error" id='error_vehicle_make_id'></div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label class="form-label"> Vehicle Model</label>
+                                                    <select name="vehicle_model_id" id="vehicle_model_id" class="select2 form-control">
+                                                        <option value="">Select Model</option>
+                                                        @if ($vehicle_models->count() > 0)
+                                                        @foreach($vehicle_models as $res)
+                                                        <option value="{{ $res->id }}"  data-chained="{{ $res->vehicle_make_id }}" @if (@$row->vehicle_model_id ==
+                                                            $res->id) selected @endif>{{$res->name}}</option>
+                                                        @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <div class="error" id='error_vehicle_model_id'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 col-6">
+                                            <label class="form-label">Service</label>
+                                            <select name="service_id" class="select2 form-control">
+                                                <option value="">Select</option>
+                                                @if ($services->count() > 0)
+                                                @foreach($services as $service)
+                                                <option value="{{ $service->id }}"  @if (@$row->service_id ==
+                                                    $service->id) selected @endif>{{$service->name}}</option>
+                                                @endforeach
+                                                @endif
+                                            </select>
+                                            <div class="error" id='error_service_id'></div>
+                                        </div>
+
                                     <div class="mb-3 col-6">
                                         <label class="form-label"> Name</label>
                                         <input type="text" class="form-control" name="name"
@@ -27,19 +73,6 @@
                                         <div class="error" id='error_price'></div>
                                     </div>
 
-                                    <div class="mb-3 col-6">
-                                        <label class="form-label">Service</label>
-                                        <select name="service_id" class="select2 form-control">
-                                            <option value="">Select</option>
-                                            @if ($services->count() > 0)
-                                            @foreach($services as $service)
-                                             <option value="{{ $service->id }}"  @if (@$row->service_id ==
-                                                $service->id) selected @endif>{{$service->name}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <div class="error" id='error_service_id'></div>
-                                    </div>
                                     <button type="submit" class="btn btn-primary  btn-loading">Submit</button>
                                 </form>
                             </div>
@@ -52,7 +85,7 @@
     </div>
     @endsection
     @section('footer-scripts')
-
+    <script src="{{ asset('assets/libs/chained/jquery.chained.min.js') }}"></script> 
     <script src="{{ asset('assets/admin/js/servicetypes/add.js') }}"></script>
 
     @endsection

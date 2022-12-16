@@ -53,11 +53,8 @@ class RepairOrderController extends Controller
         $id = ($request->id) ? $request->id : 0;
         $data['title'] = $page_title = ($id == 0) ? "Add Repair Order" : "Edit Repair Order";
         $data['action'] = route('admin-repairorders-addaction');
-        $data['row'] = RepairOrders::where('id', $id)->first();
-        $data['repair_services'] = RepairOrderService::where('repair_order_id', $id)->get();
+        $data['row'] = $repair_order = RepairOrders::where('id', $id)->first();
         $data['customers'] = Customer::where('status', 1)->get();
-        $data['part_types'] = PartTypes::where('status', 1)->get();
-        $data['service_types'] = ServiceTypes::orderBy('service_id', 'ASC')->get();
         $data['vehicle_makes'] = VehicleMake::where('status', 1)->get();
         $data['vehicle_models'] = VehicleModel::where('status', 1)->get();
         $data['vehicle_types'] = VehicleType::where('status', 1)->get();
@@ -67,6 +64,8 @@ class RepairOrderController extends Controller
         if($id == 0) {
             return view('admin.repairorders.add', compact('nav', 'sub_nav', 'page_title'), $data);
         } else {
+            $data['service_types'] = ServiceTypes::where('vehicle_model_id', $repair_order->vehicle_model_id)->orderBy('service_id', 'ASC')->get();
+            $data['part_types'] = PartTypes::where('status', 1)->get();
             return view('admin.repairorders.edit', compact('nav', 'sub_nav', 'page_title'), $data);
         }
 
@@ -75,26 +74,13 @@ class RepairOrderController extends Controller
     public function view(Request $request)
     {
         $services = new ServicesService;
-
         $nav = 'repairorders';
         $sub_nav = '';
         $id = ($request->id) ? $request->id : 0;
         $data['title'] = $page_title = "Invoice";
         $data['row'] = $repair_order = RepairOrders::where('id', $id)->first();
-        $data['customer'] = Customer::where('id', $repair_order->customer_id)->first();
-
         $data['repair_services'] = RepairOrderService::where('repair_order_id', $id)->get();
-
         $data['app_settings'] = AppSettings::first();
-
-        $data['part_types'] = PartTypes::where('status', 1)->get();
-        $data['service_types'] = ServiceTypes::orderBy('service_id', 'ASC')->get();
-        $data['vehicle_makes'] = VehicleMake::where('status', 1)->get();
-        $data['vehicle_models'] = VehicleModel::where('status', 1)->get();
-        $data['vehicle_types'] = VehicleType::where('status', 1)->get();
-        $data['staffs'] = Staff::where('status', 1)->get();
-        $data['statuses'] = Status::where('status', 1)->get();
-
         return view('admin.repairorders.view', compact('nav', 'sub_nav', 'page_title'), $data);
     }
 
@@ -106,5 +92,13 @@ class RepairOrderController extends Controller
     public function delete(Request $request)
     {
         echo $this->repairorder->delete($request);
+    }
+
+    public function loadAjaxTable(Request $request)
+    {
+        $vehicle_model_id = $request->vehicle_model_id;
+        $data['service_types'] = ServiceTypes::where('vehicle_model_id', $vehicle_model_id)->orderBy('service_id', 'ASC')->get();
+        $data['part_types'] = PartTypes::where('status', 1)->get();
+        return view('admin.repairorders.ajaxtable', $data);
     }
 }

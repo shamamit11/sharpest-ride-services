@@ -172,3 +172,56 @@ div.error {
     background-color: #ebebeb !important;
     opacity: 1;
 }
+
+.demo-code-preview {
+    border: 1px solid #ebebeb;
+    padding: 20px 25px 15px;
+    margin-top: 2rem;
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.demo-code-preview::before {
+    content: attr(data-label);
+    display: block;
+    position: absolute;
+    top: -9px;
+    left: 20px;
+    letter-spacing: 1px;
+    background-color: #ffffff;
+    font-size: 12px;
+    padding: 0 5px;
+    color: #71b6f9;
+    font-weight: 600;
+}
+
+.dt-buttons.btn-group {
+    float: right !important;
+}
+
+.dataTables_filter>label {
+    float: left !important;
+    margin-bottom: 0.8rem;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+    padding-top: 0.85em;
+    white-space: nowrap;
+    float: left;
+    font-weight: 400;
+    color: #888
+}
+
+div.dataTables_wrapper div.dataTables_paginate {
+    margin: 0;
+    padding-top: 0.25em;
+    white-space: nowrap;
+    float: right;
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+    margin: 0;
+    white-space: nowrap;
+    justify-content: right;
+}

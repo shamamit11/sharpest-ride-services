@@ -14,7 +14,7 @@ $(document).ready(function () {
                 $('.btn-loading').html('Submit');
                 if (data.status_code == 201) {
                     toastr["success"](data.message);
-                    window.location.href = app_url + '/servicetypes';
+                    window.location.href = app_url + '/inventories';
                 }
             },
             error: function (xhr) {

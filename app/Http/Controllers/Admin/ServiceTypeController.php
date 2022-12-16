@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\ServiceTypeRequest;
 use App\Models\ServiceTypes;
 use App\Models\Services;
+use App\Models\VehicleMake;
+use App\Models\VehicleModel;
 use App\Services\Admin\ServiceTypeService;
 
 class ServiceTypeController extends Controller
@@ -45,6 +47,8 @@ class ServiceTypeController extends Controller
         $data['action'] = route('admin-servicetypes-addaction');
         $data['row'] = ServiceTypes::where('id', $id)->first();
         $data['services'] = Services::where('status', 1)->get();
+        $data['vehicle_makes'] = VehicleMake::where('status', 1)->get();
+        $data['vehicle_models'] = VehicleModel::where('status', 1)->get();
         return view('admin.servicetypes.add', compact('nav', 'sub_nav', 'page_title'), $data);
     }
 

@@ -100,6 +100,7 @@ Route::group(['middleware' => 'adminauth'], function () {
         Route::post('/repairorders/addaction', 'addAction')->name('admin-repairorders-addaction');
         Route::post('/repairorders/delete', 'delete')->name('admin-repairorders-delete');
         Route::get('/repairorders/view', 'view')->name('admin-repairorders-view');
+        Route::post('/repairorders/ajax-table', 'loadAjaxTable')->name('admin-repairorders-ajax-table');
     });
 
     Route::controller('AppSettingController')->group(function () {
@@ -113,6 +114,29 @@ Route::group(['middleware' => 'adminauth'], function () {
         Route::post('/adminsettings/store', 'store')->name('admin-adminsettings-store');
         Route::post('/adminsettings/imagedelete', 'imageDelete')->name('admin-adminsettings-imagedelete');
         Route::post('/adminsettings/password', 'password')->name('admin-adminsettings-password');
+    });
+
+    Route::controller('SupplierController')->group(function () {
+        Route::get('/suppliers', 'index')->name('admin-suppliers');
+        Route::post('/suppliers/status', 'status')->name('admin-suppliers-status');
+        Route::get('/suppliers/add', 'addEdit')->name('admin-suppliers-add');
+        Route::post('/suppliers/addaction', 'addAction')->name('admin-suppliers-addaction');
+        Route::post('/suppliers/delete', 'delete')->name('admin-suppliers-delete');
+    });
+
+    Route::controller('FinanceController')->group(function () {
+        Route::get('/finances', 'index')->name('admin-finances');
+        Route::post('/finances/status', 'status')->name('admin-finances-status');
+        Route::get('/finances/add', 'addEdit')->name('admin-finances-add');
+        Route::post('/finances/addaction', 'addAction')->name('admin-finances-addaction');
+        Route::post('/finances/delete', 'delete')->name('admin-finances-delete');
+    });
+
+    Route::controller('InventoryController')->group(function () {
+        Route::get('/inventories', 'index')->name('admin-inventories');
+        Route::get('/inventories/add', 'addEdit')->name('admin-inventories-add');
+        Route::post('/inventories/addaction', 'addAction')->name('admin-inventories-addaction');
+        Route::post('/inventories/delete', 'delete')->name('admin-inventories-delete');
     });
 
 });

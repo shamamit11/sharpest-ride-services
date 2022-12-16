@@ -30,10 +30,11 @@
 
                                         <div class="float-start mt-3">
                                             <address>
-                                                <strong>{{ $customer->name }}</strong><br>
-                                                <abbr title="Phone">P:</abbr> {{ $customer->mobile }} <br>
-                                                <abbr title="Email">E:</abbr> {{ $customer->email }}
+                                                <strong>{{ $row->customer->name }}</strong><br>
+                                                <abbr title="Phone">P:</abbr> {{ $row->customer->mobile }} <br>
+                                                <abbr title="Email">E:</abbr> {{ $row->customer->email }}
                                             </address>
+                                            <p><strong>Vehicle: </strong> {{ $row->make->name }} / {{ $row->model->name }} / {{ $row->year }} / {{ $row->engine }}</p>
                                         </div>
                                         <div class="float-end mt-3">
                                             <p><strong>Order Date: </strong> {{ $row->created_at }}</p>

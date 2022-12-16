@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $('.select2').select2();
-    $("#vehicle_model_id").chained("#vehicle_make_id");
     $("#form").submit(function (e) {
         e.preventDefault();
         $('.btn-loading').prop('disabled', true)
@@ -14,7 +13,7 @@ $(document).ready(function () {
                 $('.btn-loading').html('Submit');
                 if (data.status_code == 201) {
                     toastr["success"](data.message);
-                    window.location.href = app_url + '/servicetypes';
+                    window.location.href = app_url + '/suppliers';
                 }
             },
             error: function (xhr) {

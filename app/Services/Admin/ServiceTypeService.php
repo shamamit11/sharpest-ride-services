@@ -15,6 +15,12 @@ class ServiceTypeService
                     $qry->orWhereHas('service', function ($qry1) use ($search_key) {
                         $qry1->where('name', 'LIKE', '%' . $search_key . '%');
                     });
+                    $qry->orWhereHas('make', function ($qry2) use ($search_key) {
+                        $qry2->where('name', 'LIKE', '%' . $search_key . '%');
+                    });
+                    $qry->orWhereHas('model', function ($qry3) use ($search_key) {
+                        $qry3->where('name', 'LIKE', '%' . $search_key . '%');
+                    });
                 });
             }
             $data['servicetypes'] = $query->orderBy('id', 'desc')->paginate($per_page);
@@ -64,6 +70,8 @@ class ServiceTypeService
             $servicetype->name = $request['name'];
             $servicetype->price = $request['price'];
             $servicetype->service_id = $request['service_id'];
+            $servicetype->vehicle_make_id = $request['vehicle_make_id'];
+            $servicetype->vehicle_model_id = $request['vehicle_model_id'];
             $servicetype->save();
             $response['message'] = $message;
             $response['errors'] = false;

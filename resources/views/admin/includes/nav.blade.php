@@ -18,6 +18,15 @@
                     </a>
                 </li>
 
+                <li class="menu-title mt-2">Inventory</li>
+               
+                <li class="{{ $nav == 'inventories' ? 'menuitem-active' : '' }}">
+                    <a href="{{ route('admin-inventories') }}" class="{{ $nav == 'inventories' ? 'active' : '' }}">
+                        <i class="mdi mdi-layers-triple"></i>
+                        <span> Vehicle Inventories </span>
+                    </a>
+                </li>
+
                 <li class="menu-title mt-2">Repair Jobs</li>
                
                 <li class="{{ $nav == 'repairorders' ? 'menuitem-active' : '' }}">
@@ -72,9 +81,19 @@
                 
                 <li class="menu-title mt-2">General Configuration</li>
                 
+                <li class="{{ $nav == 'suppliers' ? 'menuitem-active' : '' }}"> 
+                    <a href="{{ route('admin-suppliers') }}" class="{{ $nav == 'suppliers' ? 'active' : '' }}"> 
+                        <i class="mdi mdi-account-multiple-plus"></i> <span> Suppliers </span> </a>
+                </li>
+
+                <li class="{{ $nav == 'finances' ? 'menuitem-active' : '' }}"> 
+                    <a href="{{ route('admin-finances') }}" class="{{ $nav == 'finances' ? 'active' : '' }}"> 
+                        <i class="mdi mdi-bank"></i> <span> Finances </span> </a>
+                </li>
+
                 <li class="{{ $nav == 'staffs' ? 'menuitem-active' : '' }}"> 
                     <a href="{{ route('admin-staffs') }}" class="{{ $nav == 'staffs' ? 'active' : '' }}"> 
-                        <i class="mdi mdi-account-group"></i> <span> Staffs </span> </a>
+                        <i class="mdi mdi-account-supervisor-circle"></i> <span> Staffs </span> </a>
                 </li>
                 <li class="{{ $nav == 'status' ? 'menuitem-active' : '' }}"> 
                     <a href="{{ route('admin-status') }}" class="{{ $nav == 'status' ? 'active' : '' }}"> 

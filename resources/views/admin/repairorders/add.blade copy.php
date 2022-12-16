@@ -56,29 +56,13 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label"> Vehicle Year</label>
-                                                <select name="vehicle_year_id" id="vehicle_year_id" class="select2 form-control">
-                                                    <option value="">Select Year</option>
-                                                    @if ($vehicle_years->count() > 0)
-                                                    @foreach($vehicle_years as $res)
-                                                    <option value="{{ $res->id }}"  data-chained="{{ $res->vehicle_model_id }}" @if (@$row->vehicle_year_id ==
-                                                        $res->id) selected @endif>{{$res->name}}</option>
-                                                    @endforeach
-                                                    @endif
-                                                </select>
-                                                <div class="error" id='error_vehicle_year_id'></div>
+                                                <input type="text" class="form-control" name="year" value="{{old('year' , isset($row->year)? $row->year : '' )}}">
+                                                <div class="error" id='error_year'></div>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label"> Vehicle Engine</label>
-                                                <select name="vehicle_engine_id" id="vehicle_engine_id" class="select2 form-control">
-                                                    <option value="">Select Engine</option>
-                                                    @if ($vehicle_engines->count() > 0)
-                                                    @foreach($vehicle_engines as $res)
-                                                    <option value="{{ $res->id }}"  data-chained="{{ $res->vehicle_year_id }}" @if (@$row->vehicle_engine_id ==
-                                                        $res->id) selected @endif>{{$res->name}}</option>
-                                                    @endforeach
-                                                    @endif
-                                                </select>
-                                                <div class="error" id='error_vehicle_engine_id'></div>
+                                                <input type="text" class="form-control" name="engine" value="{{old('engine' , isset($row->engine)? $row->engine : '' )}}">
+                                                <div class="error" id='error_engine'></div>
                                             </div>
                                         </div>
                                     </div>
@@ -133,40 +117,47 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            @foreach($allservices as $service)
-                                                @if(count($service['service_types']) > 0)
-                                                    <div class="card-custom-header">
-                                                        {{ $service['service_name'] }}
-                                                    </div>
-                                                    @foreach($service['service_types'] as $type)
-                                                    <div class="card-custom-body">
-                                                        <div class="row">
-                                                            <div class="col-md-6 mt-2 mb-2">
-                                                                <input type="hidden" class="form-control" name="service_id[]" value="{{ $type->service_id }}" readonly>
-                                                                <input type="hidden" class="form-control" name="service_type_id[]" value="{{ $type->id }}" readonly>
-                                                                <input type="text" class="form-control" value="{{ $type->name }} &nbsp; / &nbsp; Unit Price: ${{ $type->price }}" readonly>
-                                                            </div>
-
-                                                            <div class="col-md-2 mt-2 mb-2">
-                                                                <input type="number" class="form-control" name="qty[]" value="" placeholder="Qty">
-                                                            </div>
-
-                                                            <div class="col-md-4 mt-2 mb-2">
-                                                            <select name="part_type_id[]" class="select2 form-control">
-                                                                <option value="">Select Part Types</option>
-                                                                @if ($part_types->count() > 0)
-                                                                @foreach($part_types as $res)
-                                                                <option value="{{ $res->id }}"  @if (@$row->part_type_id ==
-                                                                    $res->id) selected @endif>{{$res->name}}</option>
-                                                                @endforeach
-                                                                @endif
-                                                            </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
+                                            <div class="table-responsive" style="max-height:600px; overflow:auto">
+                                                <table id="serviceTable" width="100%" class="table table-bordered">
+                                                <tr>
+                                                    <th width="2%"></th>
+                                                    <th width="65%">Service Name</th>
+                                                    <th width="8%" style="text-align:center">Qty</th>
+                                                    <th width="25%">Part Types</th>
+                                                </tr>
+                                                @foreach($service_types as $res)
+                                                <tr style="vertical-align:middle">
+                                                    <td><input type="checkbox" name="chk"/></td>
+                                                    <td>
+                                                        <input name="service_id[]" type="hidden" value="{{ $res->service_id }}" class="form-control"/>
+                                                        <input name="service_type_id[]" type="hidden" value="{{ $res->id }}" class="form-control"/>
+                                                        <input name="price[]" type="hidden" value="{{ $res->price }}" class="form-control"/>
+                                                        <input type="text" value="{{ $res->service->name }} / {{ $res->name }} / Unit Price: ${{ $res->price }}" class="form-control" readonly/>
+                                                    </td>
+                                                    <td>
+                                                        <input name="qty[]" type="text" class="form-control" style="text-align:center"/>
+                                                    </td>
+                                                    <td>
+                                                        <select name="part_type_id[]" class="select2 form-control">
+                                                            <option value="">Select Part Types</option>
+                                                            @if ($part_types->count() > 0)
+                                                            @foreach($part_types as $res)
+                                                            <option value="{{ $res->id }}"  @if (@$row->part_type_id ==
+                                                                $res->id) selected @endif>{{$res->name}}</option>
+                                                            @endforeach
+                                                            @endif
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                </table>
+                                            </div>
+                                            <!-- <button type="button" class="btn btn-primary" onclick="addRow('serviceTable')"/>
+                                            <i class="bx bx-plus-medical"></i>
+                                            </button> -->
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="deleteRow('serviceTable')"/>
+                                            <i class="fa fa-trash"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
