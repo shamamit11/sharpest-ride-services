@@ -112,7 +112,7 @@
                                                         class="{{ ($row && $row->logo) ? 'd-block' : 'd-none' }}"
                                                         id='btn_image_delete'>
                                                         <button type="button" class="btn btn-xs btn-danger"
-                                                            Onclick="confirmDelete('image')">Delete Image</button>
+                                                            Onclick="confirmDelete('logo')">Delete Image</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,7 +137,7 @@
                                                         class="{{ ($row && $row->favicon) ? 'd-block' : 'd-none' }}"
                                                         id='btn_image_delete1'>
                                                         <button type="button" class="btn btn-xs btn-danger"
-                                                            Onclick="confirmDelete1('image')">Delete Image</button>
+                                                            Onclick="confirmDelete1('favicon')">Delete Image</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -246,7 +246,7 @@
                             '_token': '{{ csrf_token() }}'
                         },
                         success: function() {
-                            $("#displayImg1").attr("src",
+                            $("#displayFavImg").attr("src",
                                 "{{ asset('/assets/admin/images/browser.png')}}");
                             $("#btn_image_delete1").addClass('d-none');
                             $("#favicon").val('');
