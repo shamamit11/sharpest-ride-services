@@ -37,7 +37,7 @@
                                         @foreach($services as $row)
                                         <tr id="tr{{ $row->id }}">
                                             <td>{{ $count++ }}</td>
-                                            <td>{{ $row->name }}</td>
+                                            <td>{{ @$row->name }}</td>
                                             <td><label class="switch" style="margin: 0 auto">
                                                     <input class="switch-input switch-status" type="checkbox"
                                                         data-id="{{ $row->id }}"

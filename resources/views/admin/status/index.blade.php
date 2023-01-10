@@ -38,7 +38,7 @@
                                         @foreach($statuses as $row)
                                         <tr id="tr{{ $row->id }}">
                                             <td>{{ $count++ }}</td>
-                                            <td>{{ $row->name }}</td>
+                                            <td>{{ @$row->name }}</td>
                                             <td><span class="badge" style="background-color: {{ $row->color }}; height:15px; width:15px; border:1px solid {{$row->color}}">&nbsp;</span> {{ $row->color }}</td>
                                             <td><label class="switch" style="margin: 0 auto">
                                                     <input class="switch-input switch-status" type="checkbox"

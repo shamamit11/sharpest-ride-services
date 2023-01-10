@@ -37,7 +37,7 @@
                                         @foreach($makes as $make)
                                         <tr id="tr{{ $make->id }}">
                                             <td>{{ $count++ }}</td>
-                                            <td>{{ $make->name }}</td>
+                                            <td>{{ @$make->name }}</td>
                                             <td><label class="switch" style="margin: 0 auto">
                                                     <input class="switch-input switch-status" type="checkbox"
                                                         data-id="{{ $make->id }}"
