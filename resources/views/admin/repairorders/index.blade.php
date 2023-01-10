@@ -42,7 +42,7 @@
                                             <td>{{ $count++ }}</td>
                                             <td>{{ $row->code }}</td>
                                             <td>{{ $row->updated_at }}</td>
-                                            <td>{{ $row->customer->name }}</td>
+                                            <td>{{ @$row->customer->name }}</td>
                                             <td>{{ @$row->make->name }} / {{ @$row->model->name }} / {{ @$row->year }} / {{ @$row->engine }} / {{ @$row->vehicleType->name }}</td>
                                             <td>
                                                 <span class="badge" style="background-color: {{ @$row->status->color }}; padding: 8px">{{ @$row->status->name }}</span>
