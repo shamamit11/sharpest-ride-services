@@ -38,8 +38,8 @@
                                         @foreach($models as $model)
                                         <tr id="tr{{ $model->id }}">
                                             <td>{{ $count++ }}</td>
-                                            <td>{{ $model->name }}</td>
-                                            <td>{{ $model->make->name }}</td>
+                                            <td>{{ @$model->name }}</td>
+                                            <td>{{ @$model->make->name }}</td>
                                             <td><label class="switch" style="margin: 0 auto">
                                                     <input class="switch-input switch-status" type="checkbox"
                                                         data-id="{{ $model->id }}"

@@ -42,8 +42,8 @@
                                         <tr id="tr{{ $row->id }}">
                                             <td>{{ $count++ }}</td>
                                             <td>{{ @$row->make->name }} / {{ @$row->model->name }}</td>
-                                            <td>{{ @$row->name }}</td>
-                                            <td>{{ @$row->service->name }}</td>
+                                            <td>{{ @@$row->name }}</td>
+                                            <td>{{ @@$row->service->name }}</td>
                                             <td style="text-align:left">${{ @$row->price }}</td>
                                             <td style="text-align:center"><a
                                                     href="{{route('admin-servicetypes-edit', ['id='.$row->id])}}"
