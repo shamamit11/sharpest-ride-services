@@ -13,65 +13,53 @@
                                     <input type="hidden" class="form-control" name="id"
                                         value="{{ isset($row->id)? $row->id : '' }}">
                                     
-                                        <div class="mb-3 col-12">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label class="form-label"> Vehicle Make</label>
-                                                    <select name="vehicle_make_id" id="vehicle_make_id" class="select2 form-control">
-                                                        <option value="">Select Make</option>
-                                                        @if ($vehicle_makes->count() > 0)
-                                                        @foreach($vehicle_makes as $res)
-                                                        <option value="{{ $res->id }}"  @if (@$row->vehicle_make_id ==
-                                                            $res->id) selected @endif>{{$res->name}}</option>
-                                                        @endforeach
-                                                        @endif
-                                                    </select>
-                                                    <div class="error" id='error_vehicle_make_id'></div>
-                                                </div>
-
-                                                <div class="col-md-3">
-                                                    <label class="form-label"> Vehicle Model</label>
-                                                    <select name="vehicle_model_id" id="vehicle_model_id" class="select2 form-control">
-                                                        <option value="">Select Model</option>
-                                                        @if ($vehicle_models->count() > 0)
-                                                        @foreach($vehicle_models as $res)
-                                                        <option value="{{ $res->id }}"  data-chained="{{ $res->vehicle_make_id }}" @if (@$row->vehicle_model_id ==
-                                                            $res->id) selected @endif>{{$res->name}}</option>
-                                                        @endforeach
-                                                        @endif
-                                                    </select>
-                                                    <div class="error" id='error_vehicle_model_id'></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="mb-3 col-6">
-                                            <label class="form-label">Service</label>
-                                            <select name="service_id" class="select2 form-control">
-                                                <option value="">Select</option>
-                                                @if ($services->count() > 0)
-                                                @foreach($services as $service)
-                                                <option value="{{ $service->id }}"  @if (@$row->service_id ==
-                                                    $service->id) selected @endif>{{$service->name}}</option>
-                                                @endforeach
-                                                @endif
-                                            </select>
-                                            <div class="error" id='error_service_id'></div>
-                                        </div>
+                                    <div class="mb-3 col-6">
+                                        <label class="form-label">Service</label>
+                                        <select name="service_id" class="select2 form-control">
+                                            <option value="">Select</option>
+                                            @if ($services->count() > 0)
+                                            @foreach($services as $service)
+                                            <option value="{{ $service->id }}"  @if (@$row->service_id ==
+                                                $service->id) selected @endif>{{$service->name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                        <div class="error" id='error_service_id'></div>
+                                    </div>
 
                                     <div class="mb-3 col-6">
-                                        <label class="form-label"> Name</label>
+                                        <label class="form-label"> Service Type</label>
                                         <input type="text" class="form-control" name="name"
                                             value="{{old('name' , isset($row->name)? $row->name : '' )}}">
                                         <div class="error" id='error_name'></div>
                                     </div>
 
-                                    <div class="mb-3 col-2">
-                                        <label class="form-label"> Unit Price (USD)</label>
-                                        <input type="text" class="form-control" name="price"
-                                            value="{{old('price' , isset($row->price)? $row->price : '' )}}">
-                                        <div class="error" id='error_price'></div>
+                                    <div class="mb-3 col-12">
+
+                                        <div class="table-responsive" style="max-height:600px; overflow:auto">
+                                            <table id="vehicleTable" width="100%" class="table table-bordered">
+                                            <tr>
+                                                <th width="85%">Vehicle Make / Model</th>
+                                                <th width="15%" style="text-align:center">Unit Price</th>
+                                            </tr>
+                                            @foreach($vehicle_models as $res)
+                                            <tr style="vertical-align:middle">
+                                                <td>
+                                                    <input name="vehicle_make_id[]" type="hidden" value="{{ $res->make->id }}" class="form-control"/>
+                                                    <input name="vehicle_model_id[]" type="hidden" value="{{ $res->id }}" class="form-control"/>
+                                                    <input type="text" value="{{ $res->make->name }} / {{ $res->name }}" class="form-control" readonly/>
+                                                </td>
+                                                <td>
+                                                    <input name="price[]" type="text" class="form-control" style="text-align:center"/>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            </table>
+                                        </div>
+
                                     </div>
+
+
 
                                     <button type="submit" class="btn btn-primary  btn-loading">Submit</button>
                                 </form>

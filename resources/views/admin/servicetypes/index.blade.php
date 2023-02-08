@@ -18,8 +18,10 @@
                                                     class="align-middle" data-feather="search"></i></button>
                                         </div>
                                     </form>
-                                    <a href="{{route('admin-servicetypes-add')}}" class="btn btn-primary my-2 my-sm-0 ms-1">
-                                        Add</a>
+                                    <a href="{{route('admin-servicetypes-addmultiple')}}" class="btn btn-primary my-2 my-sm-0 ms-1">
+                                        Add Multiple Data</a>
+                                    <a href="{{route('admin-servicetypes-addsingle')}}" class="btn btn-primary my-2 my-sm-0 ms-1">
+                                        Add Single Data</a>
                                 </nav>
                             </div>
                             <div class="card-body">
@@ -40,11 +42,11 @@
                                         <tr id="tr{{ $row->id }}">
                                             <td>{{ $count++ }}</td>
                                             <td>{{ @$row->make->name }} / {{ @$row->model->name }}</td>
-                                            <td>{{ $row->name }}</td>
-                                            <td>{{ $row->service->name }}</td>
-                                            <td style="text-align:left">${{ $row->price }}</td>
+                                            <td>{{ @$row->name }}</td>
+                                            <td>{{ @$row->service->name }}</td>
+                                            <td style="text-align:left">${{ @$row->price }}</td>
                                             <td style="text-align:center"><a
-                                                    href="{{route('admin-servicetypes-add', ['id='.$row->id])}}"
+                                                    href="{{route('admin-servicetypes-edit', ['id='.$row->id])}}"
                                                     class="btn btn-sm btn-warning rounded-pill"><i
                                                         class="fas fa-pen"></i></a>
                                                 <button type="button"

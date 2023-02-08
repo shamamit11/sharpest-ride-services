@@ -25,10 +25,10 @@ class ServiceTypeRequest extends ApiRequest
         return [
             'id' => 'integer|nullable',
             'service_id' => 'required',
-            'vehicle_make_id' => 'required',
-            'vehicle_model_id' => 'required',
+            'vehicle_make_id' => '',
+            'vehicle_model_id' => '',
             'name' => 'required',
-            'price' => 'required'
+            'price' => ''
         ];
     }
 }

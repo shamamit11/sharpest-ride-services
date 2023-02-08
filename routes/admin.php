@@ -81,8 +81,11 @@ Route::group(['middleware' => 'adminauth'], function () {
     Route::controller('ServiceTypeController')->group(function () {
         Route::get('/servicetypes', 'index')->name('admin-servicetypes');
         Route::post('/servicetypes/status', 'status')->name('admin-servicetypes-status');
-        Route::get('/servicetypes/add', 'addEdit')->name('admin-servicetypes-add');
+        Route::get('/servicetypes/addMultiple', 'addEdit')->name('admin-servicetypes-addmultiple');
         Route::post('/servicetypes/addaction', 'addAction')->name('admin-servicetypes-addaction');
+        Route::get('/servicetypes/edit', 'editView')->name('admin-servicetypes-edit');
+        Route::get('/servicetypes/addSingle', 'editView')->name('admin-servicetypes-addsingle');
+        Route::post('/servicetypes/editaction', 'editAction')->name('admin-servicetypes-editaction');
         Route::post('/servicetypes/delete', 'delete')->name('admin-servicetypes-delete');
     });
 

@@ -67,12 +67,46 @@ class ServiceTypeService
                 $servicetype = new ServiceTypes;
                 $message = "Data added";
             }
+
+            foreach ($request['price'] as $key => $price) {
+                $servicetype = new ServiceTypes;
+                $servicetype->service_id = $request['service_id'];
+                $servicetype->name = $request['name'];
+                $servicetype->price = $price;
+                $servicetype->vehicle_make_id = $request['vehicle_make_id'][$key];
+                $servicetype->vehicle_model_id = $request['vehicle_model_id'][$key];
+                $servicetype->save();
+            }
+
+            $response['message'] = $message;
+            $response['errors'] = false;
+            $response['status_code'] = 201;
+            return response()->json($response, 201);
+        } catch (\Exception$e) {
+            return response()->json(['errors' => $e->getMessage()], 401);
+        }
+    }
+
+    public function edit($request)
+    {
+        try {
+            if ($request['id']) {
+                $id = $request['id'];
+                $servicetype = ServiceTypes::findOrFail($id);
+                $message = "Data updated";
+            } else {
+                $id = 0;
+                $servicetype = new ServiceTypes;
+                $message = "Data added";
+            }
+
+            $servicetype->service_id = $request['service_id'];
             $servicetype->name = $request['name'];
             $servicetype->price = $request['price'];
-            $servicetype->service_id = $request['service_id'];
             $servicetype->vehicle_make_id = $request['vehicle_make_id'];
             $servicetype->vehicle_model_id = $request['vehicle_model_id'];
             $servicetype->save();
+
             $response['message'] = $message;
             $response['errors'] = false;
             $response['status_code'] = 201;
