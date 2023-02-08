@@ -49,6 +49,7 @@ class ServiceTypeController extends Controller
         $data['services'] = Services::where('status', 1)->get();
         $data['vehicle_makes'] = VehicleMake::where('status', 1)->get();
         $data['vehicle_models'] = VehicleModel::where('status', 1)->get();
+
         return view('admin.servicetypes.add', compact('nav', 'sub_nav', 'page_title'), $data);
     }
 

@@ -45,9 +45,9 @@
                                             @foreach($vehicle_models as $res)
                                             <tr style="vertical-align:middle">
                                                 <td>
-                                                    <input name="vehicle_make_id[]" type="hidden" value="{{ $res->make->id }}" class="form-control"/>
+                                                    <input name="vehicle_make_id[]" type="hidden" value="{{ @$res->make->id }}" class="form-control"/>
                                                     <input name="vehicle_model_id[]" type="hidden" value="{{ $res->id }}" class="form-control"/>
-                                                    <input type="text" value="{{ $res->make->name }} / {{ $res->name }}" class="form-control" readonly/>
+                                                    <input type="text" value="{{ @$res->make->name }} / {{ @$res->name }}" class="form-control" readonly/>
                                                 </td>
                                                 <td>
                                                     <input name="price[]" type="text" class="form-control" style="text-align:center"/>
